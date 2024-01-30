@@ -1,21 +1,26 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import Notifications from "./Notifications";
+import "./Notifications.css";
+import closeIcon from "./close-icon.png";
+import { getLatestNotification } from "./utils";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function Notifications() {
+  return (
+    <div className="Notifications">
+      <button
+        style={{ color: "#3a3a3a", fontWeight: "bold", background: "none", border: "none", fontSize: "15px", position: "absolute", right: "2px", top: "2px", cursor: "pointer" }}
+        aria-label="Close"
+        onClick={console.log("Close button has been clicked")}
+      >
+        <img src={closeIcon} alt="closeIcon" width="10px" />
+      </button>
+      <p>Here is the list of notifications</p>
+      <ul>
+        <li data="default">New course available</li>
+        <li data="urgent">New resume available</li>
+        <li data="urgent" dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
+      </ul>
+    </div>
+  );
+}
 
-const rootNotifications = ReactDOM.createRoot(document.getElementById("root-notifications"));
-rootNotifications.render(
-  <React.StrictMode>
-    <Notifications />
-  </React.StrictMode>
-);
-
-reportWebVitals();
+export default Notifications;
